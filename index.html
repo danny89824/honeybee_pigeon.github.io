@@ -33,7 +33,7 @@
     </header>
 
     <div class="container">
-        <!-- 1. 사주 입력 -->
+        <!-- 사주 입력 -->
         <input type="text" id="userName" placeholder="이름 (예: 지민 팬)" required>
         <div class="form-row">
             <input type="date" id="userBirth" required>
@@ -46,25 +46,25 @@
             <option value="기타">기타</option>
         </select>
 
-        <!-- 2. 아티스트 선택 -->
+        <!-- 아티스트 선택 -->
         <select id="artist" required>
-            <option value="">스타를 골라주세요</option>
-            <option value="RM">BTS RM</option>
-            <option value="Jennie">BLACKPINK 제니</option>
-            <option value="BangChan">Stray Kids 방찬</option>
-            <option value="S.Coups">SEVENTEEN 승철</option>
-            <option value="Karina">aespa 카리나</option>
-            <option value="Jungwon">ENHYPEN 정원</option>
-            <option value="Minji">NewJeans 민지</option>
-            <option value="Yujin">IVE 유진</option>
-            <option value="Hongjoong">ATEEZ 홍중</option>
-            <option value="Yeonjun">TXT 연준</option>
+            <option value="">💖 스타를 골라주세요</option>
+            <option value="RM">BTS RM ─ 책덕후 리더</option>
+            <option value="Jennie">BLACKPINK 제니 ─ 패션 퀸</option>
+            <option value="BangChan">Stray Kids 방찬 ─ 밤샘 프로듀서</option>
+            <option value="S.Coups">SEVENTEEN 승철 ─ 13명 아빠</option>
+            <option value="Karina">aespa 카리나 ─ AI 공주</option>
+            <option value="Jungwon">ENHYPEN 정원 ─ 막내 온 탑</option>
+            <option value="Minji">NewJeans 민지 ─ Y2K 아이콘</option>
+            <option value="Yujin">IVE 유진 ─ 카리스마 보컬</option>
+            <option value="Hongjoong">ATEEZ 홍중 ─ 해적왕 캡틴</option>
+            <option value="Yeonjun">TXT 연준 ─ 4세대 춤신</option>
         </select>
 
-        <!-- 3. 랭킹 별명 -->
+        <!-- 랭킹 별명 -->
         <input type="text" id="nickname" placeholder="랭킹에 남길 별명 (예: 지민의꽃길)" required>
 
-        <button onclick="calculate()">궁합 점수 뽑기 + 랭킹 등록</button>
+        <button onclick="calculate()">🚀 궁합 점수 뽑기</button>
 
         <div id="result"></div>
 
@@ -83,28 +83,44 @@
 
     <script>
         const artistData = {
-            RM: {birth:'1994-09-12', emoji:'책', hobby:'철학 토론'},
-            Jennie: {birth:'1996-01-16', emoji:'왕관', hobby:'럭셔리 쇼핑'},
-            BangChan: {birth:'1997-10-03', emoji:'헤드폰', hobby:'밤샘 작곡'},
-            'S.Coups': {birth:'1995-08-08', emoji:'가족', hobby:'13명 챙기기'},
-            Karina: {birth:'2000-04-11', emoji:'로봇', hobby:'AI 댄스'},
-            Jungwon: {birth:'2004-02-09', emoji:'늑대', hobby:'리더십'},
-            Minji: {birth:'2004-05-07', emoji:'삐삐', hobby:'Y2K 패션'},
-            Yujin: {birth:'2003-08-01', emoji:'마이크', hobby:'무대 장악'},
-            Hongjoong: {birth:'1998-11-07', emoji:'해적', hobby:'스토리텔링'},
-            Yeonjun: {birth:'1999-09-13', emoji:'춤', hobby:'퍼포먼스 혁신'}
+            RM: {birth:'1994-09-12', element:'목', hobby:'책 읽기·철학 토론', emoji:'📚'},
+            Jennie: {birth:'1996-01-16', element:'화', hobby:'패션·럭셔리 쇼핑', emoji:'👑'},
+            BangChan: {birth:'1997-10-03', element:'금', hobby:'밤샘 작곡', emoji:'🎧'},
+            'S.Coups': {birth:'1995-08-08', element:'토', hobby:'13명 챙기기', emoji:'👨‍👩‍👧‍👦'},
+            Karina: {birth:'2000-04-11', element:'수', hobby:'AI 댄스', emoji:'🤖'},
+            Jungwon: {birth:'2004-02-09', element:'화', hobby:'리더십 훈련', emoji:'🐺'},
+            Minji: {birth:'2004-05-07', element:'목', hobby:'Y2K 패션', emoji:'📟'},
+            Yujin: {birth:'2003-08-01', element:'금', hobby:'무대 장악', emoji:'🎤'},
+            Hongjoong: {birth:'1998-11-07', element:'토', hobby:'해적 스토리텔링', emoji:'🏴‍☠️'},
+            Yeonjun: {birth:'1999-09-13', element:'수', hobby:'퍼포먼스 혁신', emoji:'💃'}
         };
+
+        // 오행 상생/상극 점수 (0~100)
+        const elementScores = {
+            '목': {목:50, 화:80, 토:30, 금:20, 수:70},
+            '화': {목:70, 화:50, 토:80, 금:30, 수:20},
+            '토': {목:20, 화:70, 토:50, 금:80, 수:30},
+            '금': {목:30, 화:20, 토:70, 금:50, 수:80},
+            '수': {목:80, 화:30, 토:20, 금:70, 수:50}
+        };
+
+        function getUserElement(birth) {
+            const year = new Date(birth).getFullYear();
+            const elements = ['목','화','토','금','수'];
+            return elements[year % 5];
+        }
 
         function saveRanking(name, nick, score, artist) {
             const rankings = JSON.parse(localStorage.getItem('kpopRankings') || '[]');
             rankings.push({name, nick, score, artist, date: new Date().toISOString()});
             rankings.sort((a,b)=>b.score-a.score);
             localStorage.setItem('kpopRankings', JSON.stringify(rankings.slice(0,1000)));
+            return rankings;
         }
 
         function getMyRank(score) {
             const rankings = JSON.parse(localStorage.getItem('kpopRankings') || '[]');
-            return rankings.filter(r=>r.score >= score).length + 1;
+            return rankings.filter(r=>r.score>score).length + 1;
         }
 
         function calculate() {
@@ -120,25 +136,39 @@
                 return;
             }
 
-            // 점수 계산 (사주 기반 시뮬레이션)
-            const seed = `${birth}${time}${name}${artist}`.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
-            const score = Math.floor((seed % 25) + 75); // 75~99
+            // 점수 계산: 오행 + 입력값 기반
+            const userElement = getUserElement(birth);
+            const artistElement = artistData[artist].element;
+            let score = elementScores[userElement][artistElement];
+
+            // 이름/시간 가중치 (간단 시뮬)
+            const seed = `${name}${time}${gender}`.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+            score = Math.floor(score * 0.7 + (seed % 30)); // 0~100
+            score = Math.min(100, Math.max(0, score));
 
             // 랭킹 저장
             saveRanking(name, nick, score, artist);
             const rank = getMyRank(score);
 
+            // 결과 문구
             const data = artistData[artist];
+            let message = '';
+            if (score >= 90) message = '천생연분! 콘서트 가서 운명 시작🔥';
+            else if (score >= 80) message = '최고 케미! 같이 무대 찢을 인연💥';
+            else if (score >= 70) message = '좋은 인연! 팬미팅 가도 잘 맞을걸?';
+            else if (score >= 60) message = '친구로 딱! 같이 게임하면 재밌어🎮';
+            else message = '조금 노력하면 좋은 친구 가능! 응원해💪';
+
             document.getElementById('result').innerHTML = `
                 <h2>${data.emoji} ${artist}와(과) 궁합</h2>
-                <div class="rank">${score}점</div>
+                <div class="rank">${score}/100점</div>
                 <p><b>${nick}</b> 님은 전 세계 <b>${rank.toLocaleString()}등</b>!</p>
                 <p>✨ ${artist} 생일: ${data.birth} | 취미: ${data.hobby}</p>
-                <p>사주 힌트: ${gender==='남'?'양기운':'음기운'} 강함 → ${score>90?'천생연분':score>80?'최고 케미':'좋은 인연'}!</p>
+                <p>사주 힌트: 당신의 <b>${userElement}</b> 기운과 ${artist}의 <b>${artistElement}</b> 기운 → ${message}</p>
                 <div class="share">
                     <a href="https://x.com/intent/tweet?text=${encodeURIComponent(
-                        `${nick}의 ${artist} 궁합 ${score}점! 세계 ${rank}등 기록🔥\nhttps://danny89824.github.io/honeybee_pigeon.github.io/`
-                    )}" target="_blank">X에 자랑하기</a>
+                        `${nick}의 ${artist} 궁합 ${score}/100점! 세계 ${rank}등 기록🔥\nhttps://danny89824.github.io/honeybee_pigeon.github.io/`
+                    )}" target="_blank">🐦 X에 자랑하기</a>
                 </div>
             `;
         }
