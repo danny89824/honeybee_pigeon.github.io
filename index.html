@@ -2,76 +2,144 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>K-Pop 사주 궁합 랭킹</title>
-    <style> body { font-family: Arial; text-align: center; } input, select { margin: 10px; padding: 5px; } #result { margin-top: 20px; font-size: 18px; } </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>★ 나와 K-Pop 스타 궁합 랭킹 ★</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Black+Han+Sans&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3940256099942544" crossorigin="anonymous"></script>
+    <style>
+        :root {--pink:#ff6ac2;--purple:#9b59b6;--grad:linear-gradient(135deg,#ff6ac2,#9b59b6);}
+        body{margin:0;background:var(--grad) fixed;color:#fff;font-family:'Gamja Flower',cursive;text-align:center;min-height:100vh;display:flex;flex-direction:column;}
+        header{padding:20px;background:rgba(0,0,0,0.3);backdrop-filter:blur(10px);}
+        h1{font-family:'Black Han Sans';font-size:2.8rem;margin:10px;text-shadow:0 0 20px #fff;}
+        .container{flex:1;max-width:500px;margin:20px auto;background:rgba(255,255,255,0.15);border-radius:30px;padding:30px;box-shadow:0 20px 40px rgba(0,0,0,0.3);backdrop-filter:blur(15px);}
+        input,select,button{width:100%;padding:15px;margin:12px 0;border:none;border-radius:15px;font-size:1.2rem;font-family:'Gamja Flower';}
+        select{background:#fff;color:#333;}
+        button{background:var(--pink);color:#fff;font-weight:bold;cursor:pointer;box-shadow:0 8px 15px rgba(255,106,194,0.4);transition:0.3s;}
+        button:hover{transform:translateY(-3px);box-shadow:0 12px 20px rgba(255,106,194,0.6);}
+        #result{margin-top:30px;padding:20px;background:rgba(255,255,255,0.2);border-radius:20px;font-size:1.3rem;line-height:1.8;}
+        .rank{font-size:3rem;color:#fff36e;}
+        .share{margin-top:20px;display:flex;gap:15px;justify-content:center;}
+        .share a{background:#1da1f2;color:#fff;padding:12px 20px;border-radius:50px;text-decoration:none;font-weight:bold;}
+        footer{padding:15px;font-size:0.9rem;opacity:0.8;}
+        .ads{margin:20px auto;max-width:320px;}
+        .form-row{display:flex;gap:10px;}
+        .form-row input{flex:1;}
+    </style>
 </head>
 <body>
-    <h1>나와 K-Pop 아티스트 궁합 테스트 (Top 10 그룹)</h1>
-    <p>생년월일을 입력하고 아티스트를 선택하세요! (재미용)</p>
-    
-    <input type="date" id="userBirth" required> <br>
-    <select id="artist">
-        <option value="">아티스트 선택</option>
-        <option value="RM">BTS - RM (1994.09.12, 취미: 책 읽기, 관심사: 철학)</option>
-        <option value="Jennie">BLACKPINK - Jennie (1996.01.16, 취미: 패션, 관심사: 여행)</option>
-        <option value="BangChan">Stray Kids - Bang Chan (1997.10.03, 취미: 프로듀싱, 관심사: 피트니스)</option>
-        <option value="S.Coups">SEVENTEEN - S.Coups (1995.08.08, 취미: 리더십 훈련, 관심사: 게임)</option>
-        <option value="Karina">aespa - Karina (2000.04.11, 취미: 댄스, 관심사: AI 테크)</option>
-        <option value="Jungwon">ENHYPEN - Jungwon (2004.02.09, 취미: 리더십, 관심사: 스포츠)</option>
-        <option value="Minji">NewJeans - Minji (2004.05.07, 취미: 패션, 관심사: Y2K 문화)</option>
-        <option value="Yujin">IVE - Yujin (2003.08.01, 취미: 보컬, 관심사: 리더십)</option>
-        <option value="Hongjoong">ATEEZ - Hongjoong (1998.11.07, 취미: 작곡, 관심사: 패션)</option>
-        <option value="Yeonjun">TXT - Yeonjun (1999.09.13, 취미: 댄스, 관심사: 팝 컬처)</option>
-    </select> <br>
-    <button onclick="calculateCompatibility()">궁합 보기</button>
-    
-    <div id="result"></div>
-    
+    <header>
+        <h1>✨ K-Pop 궁합 세계 1등 도전 ✨</h1>
+        <p>사주 풀 입력 → 랭킹 등록 → 전세계 자랑</p>
+    </header>
+
+    <div class="container">
+        <!-- 1. 사주 입력 -->
+        <input type="text" id="userName" placeholder="이름 (예: 지민 팬)" required>
+        <div class="form-row">
+            <input type="date" id="userBirth" required>
+            <input type="time" id="userTime" placeholder="시간 (모르면 12:00)">
+        </div>
+        <select id="gender" required>
+            <option value="">성별</option>
+            <option value="남">남성</option>
+            <option value="여">여성</option>
+            <option value="기타">기타</option>
+        </select>
+
+        <!-- 2. 아티스트 선택 -->
+        <select id="artist" required>
+            <option value="">스타를 골라주세요</option>
+            <option value="RM">BTS RM</option>
+            <option value="Jennie">BLACKPINK 제니</option>
+            <option value="BangChan">Stray Kids 방찬</option>
+            <option value="S.Coups">SEVENTEEN 승철</option>
+            <option value="Karina">aespa 카리나</option>
+            <option value="Jungwon">ENHYPEN 정원</option>
+            <option value="Minji">NewJeans 민지</option>
+            <option value="Yujin">IVE 유진</option>
+            <option value="Hongjoong">ATEEZ 홍중</option>
+            <option value="Yeonjun">TXT 연준</option>
+        </select>
+
+        <!-- 3. 랭킹 별명 -->
+        <input type="text" id="nickname" placeholder="랭킹에 남길 별명 (예: 지민의꽃길)" required>
+
+        <button onclick="calculate()">궁합 점수 뽑기 + 랭킹 등록</button>
+
+        <div id="result"></div>
+
+        <!-- 애드센스 -->
+        <div class="ads">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3940256099942544"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+
+    <footer>© 2025 Danny의 꿀벌비둘기 | 재미용 사주 서비스</footer>
+
     <script>
         const artistData = {
-            RM: { birth: '1994-09-12', hobbies: '책 읽기, 철학' },
-            Jennie: { birth: '1996-01-16', hobbies: '패션, 여행' },
-            BangChan: { birth: '1997-10-03', hobbies: '프로듀싱, 피트니스' },
-            S_Coups: { birth: '1995-08-08', hobbies: '리더십 훈련, 게임' },
-            Karina: { birth: '2000-04-11', hobbies: '댄스, AI 테크' },
-            Jungwon: { birth: '2004-02-09', hobbies: '리더십, 스포츠' },
-            Minji: { birth: '2004-05-07', hobbies: '패션, Y2K 문화' },
-            Yujin: { birth: '2003-08-01', hobbies: '보컬, 리더십' },
-            Hongjoong: { birth: '1998-11-07', hobbies: '작곡, 패션' },
-            Yeonjun: { birth: '1999-09-13', hobbies: '댄스, 팝 컬처' }
+            RM: {birth:'1994-09-12', emoji:'책', hobby:'철학 토론'},
+            Jennie: {birth:'1996-01-16', emoji:'왕관', hobby:'럭셔리 쇼핑'},
+            BangChan: {birth:'1997-10-03', emoji:'헤드폰', hobby:'밤샘 작곡'},
+            'S.Coups': {birth:'1995-08-08', emoji:'가족', hobby:'13명 챙기기'},
+            Karina: {birth:'2000-04-11', emoji:'로봇', hobby:'AI 댄스'},
+            Jungwon: {birth:'2004-02-09', emoji:'늑대', hobby:'리더십'},
+            Minji: {birth:'2004-05-07', emoji:'삐삐', hobby:'Y2K 패션'},
+            Yujin: {birth:'2003-08-01', emoji:'마이크', hobby:'무대 장악'},
+            Hongjoong: {birth:'1998-11-07', emoji:'해적', hobby:'스토리텔링'},
+            Yeonjun: {birth:'1999-09-13', emoji:'춤', hobby:'퍼포먼스 혁신'}
         };
-        
-        // 간단 오행 계산 (년도 % 5: 0-목,1-화,2-토,3-금,4-수)
-        function getElement(year) { return (year % 5) % 5; } // 0:Wood,1:Fire,2:Earth,3:Metal,4:Water
-        
-        function calculateCompatibility() {
-            const userBirth = document.getElementById('userBirth').value;
+
+        function saveRanking(name, nick, score, artist) {
+            const rankings = JSON.parse(localStorage.getItem('kpopRankings') || '[]');
+            rankings.push({name, nick, score, artist, date: new Date().toISOString()});
+            rankings.sort((a,b)=>b.score-a.score);
+            localStorage.setItem('kpopRankings', JSON.stringify(rankings.slice(0,1000)));
+        }
+
+        function getMyRank(score) {
+            const rankings = JSON.parse(localStorage.getItem('kpopRankings') || '[]');
+            return rankings.filter(r=>r.score >= score).length + 1;
+        }
+
+        function calculate() {
+            const name = document.getElementById('userName').value.trim();
+            const birth = document.getElementById('userBirth').value;
+            const time = document.getElementById('userTime').value || '12:00';
+            const gender = document.getElementById('gender').value;
             const artist = document.getElementById('artist').value;
-            if (!userBirth || !artist) { alert('모두 입력하세요!'); return; }
-            
-            const userYear = new Date(userBirth).getFullYear();
-            const artistBirth = artistData[artist].birth;
-            const artistYear = new Date(artistBirth).getFullYear();
-            
-            const userElement = getElement(userYear);
-            const artistElement = getElement(artistYear);
-            let score = Math.abs(userElement - artistElement) * 20; // 호환성 (0=상생)
-            score += Math.random() * 20; // 랜덤 재미
-            score = Math.round(Math.max(0, Math.min(100, score)));
-            
-            // 랭킹: LocalStorage로 가상 저장 (실제: Firebase)
-            let rankings = JSON.parse(localStorage.getItem('rankings') || '[]');
-            rankings.push({ artist, score, date: new Date().toISOString() });
-            rankings.sort((a,b) => b.score - a.score);
-            rankings = rankings.slice(0,10); // Top 10만
-            localStorage.setItem('rankings', JSON.stringify(rankings));
-            const myRank = rankings.findIndex(r => r.score === score) + 1;
-            
+            const nick = document.getElementById('nickname').value.trim();
+
+            if (!name || !birth || !gender || !artist || !nick) {
+                alert('모든 항목을 입력해주세요!');
+                return;
+            }
+
+            // 점수 계산 (사주 기반 시뮬레이션)
+            const seed = `${birth}${time}${name}${artist}`.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+            const score = Math.floor((seed % 25) + 75); // 75~99
+
+            // 랭킹 저장
+            saveRanking(name, nick, score, artist);
+            const rank = getMyRank(score);
+
+            const data = artistData[artist];
             document.getElementById('result').innerHTML = `
-                <h2>${artist}와 궁합: ${score}점!</h2>
-                <p>전체 랭킹: ${myRank}등 (총 ${rankings.length}명 중)</p>
-                <p>아티스트 프로필: 생일 ${artistBirth}, 취미/관심사: ${artistData[artist].hobbies}</p>
-                <p><a href="https://x.com/intent/tweet?text=나와 ${artist} 궁합 ${score}점! #KpopSaju" target="_blank">X에 공유</a></p>
+                <h2>${data.emoji} ${artist}와(과) 궁합</h2>
+                <div class="rank">${score}점</div>
+                <p><b>${nick}</b> 님은 전 세계 <b>${rank.toLocaleString()}등</b>!</p>
+                <p>✨ ${artist} 생일: ${data.birth} | 취미: ${data.hobby}</p>
+                <p>사주 힌트: ${gender==='남'?'양기운':'음기운'} 강함 → ${score>90?'천생연분':score>80?'최고 케미':'좋은 인연'}!</p>
+                <div class="share">
+                    <a href="https://x.com/intent/tweet?text=${encodeURIComponent(
+                        `${nick}의 ${artist} 궁합 ${score}점! 세계 ${rank}등 기록🔥\nhttps://danny89824.github.io/honeybee_pigeon.github.io/`
+                    )}" target="_blank">X에 자랑하기</a>
+                </div>
             `;
         }
     </script>
