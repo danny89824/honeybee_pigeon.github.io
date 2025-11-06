@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>K-Pop 사주 궁합 랭킹</title>
+    <style> body { font-family: Arial; text-align: center; } input, select { margin: 10px; padding: 5px; } #result { margin-top: 20px; font-size: 18px; } </style>
+</head>
+<body>
+    <h1>나와 K-Pop 아티스트 궁합 테스트 (Top 10 그룹)</h1>
+    <p>생년월일을 입력하고 아티스트를 선택하세요! (재미용)</p>
+    
+    <input type="date" id="userBirth" required> <br>
+    <select id="artist">
+        <option value="">아티스트 선택</option>
+        <option value="RM">BTS - RM (1994.09.12, 취미: 책 읽기, 관심사: 철학)</option>
+        <option value="Jennie">BLACKPINK - Jennie (1996.01.16, 취미: 패션, 관심사: 여행)</option>
+        <option value="BangChan">Stray Kids - Bang Chan (1997.10.03, 취미: 프로듀싱, 관심사: 피트니스)</option>
+        <option value="S.Coups">SEVENTEEN - S.Coups (1995.08.08, 취미: 리더십 훈련, 관심사: 게임)</option>
+        <option value="Karina">aespa - Karina (2000.04.11, 취미: 댄스, 관심사: AI 테크)</option>
+        <option value="Jungwon">ENHYPEN - Jungwon (2004.02.09, 취미: 리더십, 관심사: 스포츠)</option>
+        <option value="Minji">NewJeans - Minji (2004.05.07, 취미: 패션, 관심사: Y2K 문화)</option>
+        <option value="Yujin">IVE - Yujin (2003.08.01, 취미: 보컬, 관심사: 리더십)</option>
+        <option value="Hongjoong">ATEEZ - Hongjoong (1998.11.07, 취미: 작곡, 관심사: 패션)</option>
+        <option value="Yeonjun">TXT - Yeonjun (1999.09.13, 취미: 댄스, 관심사: 팝 컬처)</option>
+    </select> <br>
+    <button onclick="calculateCompatibility()">궁합 보기</button>
+    
+    <div id="result"></div>
+    
+    <script>
+        const artistData = {
+            RM: { birth: '1994-09-12', hobbies: '책 읽기, 철학' },
+            Jennie: { birth: '1996-01-16', hobbies: '패션, 여행' },
+            BangChan: { birth: '1997-10-03', hobbies: '프로듀싱, 피트니스' },
+            S_Coups: { birth: '1995-08-08', hobbies: '리더십 훈련, 게임' },
+            Karina: { birth: '2000-04-11', hobbies: '댄스, AI 테크' },
+            Jungwon: { birth: '2004-02-09', hobbies: '리더십, 스포츠' },
+            Minji: { birth: '2004-05-07', hobbies: '패션, Y2K 문화' },
+            Yujin: { birth: '2003-08-01', hobbies: '보컬, 리더십' },
+            Hongjoong: { birth: '1998-11-07', hobbies: '작곡, 패션' },
+            Yeonjun: { birth: '1999-09-13', hobbies: '댄스, 팝 컬처' }
+        };
+        
+        // 간단 오행 계산 (년도 % 5: 0-목,1-화,2-토,3-금,4-수)
+        function getElement(year) { return (year % 5) % 5; } // 0:Wood,1:Fire,2:Earth,3:Metal,4:Water
+        
+        function calculateCompatibility() {
+            const userBirth = document.getElementById('userBirth').value;
+            const artist = document.getElementById('artist').value;
+            if (!userBirth || !artist) { alert('모두 입력하세요!'); return; }
+            
+            const userYear = new Date(userBirth).getFullYear();
+            const artistBirth = artistData[artist].birth;
+            const artistYear = new Date(artistBirth).getFullYear();
+            
+            const userElement = getElement(userYear);
+            const artistElement = getElement(artistYear);
+            let score = Math.abs(userElement - artistElement) * 20; // 호환성 (0=상생)
+            score += Math.random() * 20; // 랜덤 재미
+            score = Math.round(Math.max(0, Math.min(100, score)));
+            
+            // 랭킹: LocalStorage로 가상 저장 (실제: Firebase)
+            let rankings = JSON.parse(localStorage.getItem('rankings') || '[]');
+            rankings.push({ artist, score, date: new Date().toISOString() });
+            rankings.sort((a,b) => b.score - a.score);
+            rankings = rankings.slice(0,10); // Top 10만
+            localStorage.setItem('rankings', JSON.stringify(rankings));
+            const myRank = rankings.findIndex(r => r.score === score) + 1;
+            
+            document.getElementById('result').innerHTML = `
+                <h2>${artist}와 궁합: ${score}점!</h2>
+                <p>전체 랭킹: ${myRank}등 (총 ${rankings.length}명 중)</p>
+                <p>아티스트 프로필: 생일 ${artistBirth}, 취미/관심사: ${artistData[artist].hobbies}</p>
+                <p><a href="https://x.com/intent/tweet?text=나와 ${artist} 궁합 ${score}점! #KpopSaju" target="_blank">X에 공유</a></p>
+            `;
+        }
+    </script>
+</body>
+</html>
