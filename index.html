@@ -3,175 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>★ 나와 K-Pop 스타 궁합 랭킹 ★</title>
-    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3940256099942544" crossorigin="anonymous"></script>
+    <title>[회사명] | 비즈니스가 팔리는 전략적 웹사이트 제작</title>
+    <meta name="description" content="고객 전환을 유도하는 데이터 기반 웹사이트 제작 전문, [회사명]입니다.">
+    <meta property="og:title" content="[회사명] 공식 서비스">
+    <meta property="og:description" content="디자인을 넘어 비즈니스 성장을 만듭니다.">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
     <style>
-        :root {--pink:#ff6ac2;--purple:#9b59b6;--grad:linear-gradient(135deg,#ff6ac2,#9b59b6);}
-        body{margin:0;background:var(--grad) fixed;color:#fff;font-family:'Gamja Flower',cursive;text-align:center;min-height:100vh;display:flex;flex-direction:column;}
-        header{padding:20px;background:rgba(0,0,0,0.3);backdrop-filter:blur(10px);}
-        h1{font-family:'Black Han Sans';font-size:2.8rem;margin:10px;text-shadow:0 0 20px #fff;}
-        .container{flex:1;max-width:500px;margin:20px auto;background:rgba(255,255,255,0.15);border-radius:30px;padding:30px;box-shadow:0 20px 40px rgba(0,0,0,0.3);backdrop-filter:blur(15px);}
-        input,select,button{width:100%;padding:15px;margin:12px 0;border:none;border-radius:15px;font-size:1.2rem;font-family:'Gamja Flower';}
-        select{background:#fff;color:#333;}
-        button{background:var(--pink);color:#fff;font-weight:bold;cursor:pointer;box-shadow:0 8px 15px rgba(255,106,194,0.4);transition:0.3s;}
-        button:hover{transform:translateY(-3px);box-shadow:0 12px 20px rgba(255,106,194,0.6);}
-        #result{margin-top:30px;padding:20px;background:rgba(255,255,255,0.2);border-radius:20px;font-size:1.3rem;line-height:1.8;}
-        .rank{font-size:3rem;color:#fff36e;}
-        .share{margin-top:20px;display:flex;gap:15px;justify-content:center;}
-        .share a{background:#1da1f2;color:#fff;padding:12px 20px;border-radius:50px;text-decoration:none;font-weight:bold;}
-        footer{padding:15px;font-size:0.9rem;opacity:0.8;}
-        .ads{margin:20px auto;max-width:320px;}
-        .form-row{display:flex;gap:10px;}
-        .form-row input{flex:1;}
+        :root {
+            --primary-color: #000;
+            --accent-color: #ffeb00; /* 카카오 포인트 컬러 참고 */
+            --text-main: #111;
+            --text-sub: #666;
+            --bg-light: #f9f9f9;
+            --max-width: 1200px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+        body { color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        section { padding: 100px 20px; }
+        .container { max-width: var(--max-width); margin: 0 auto; }
+        .btn { padding: 15px 30px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; border: none; }
+        .btn-primary { background: var(--primary-color); color: #fff; }
+        .btn-primary:hover { background: #333; transform: translateY(-3px); }
+
+        /* GNB */
+        header { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid #eee; }
+        nav { display: flex; justify-content: space-between; align-items: center; height: 70px; max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+        .logo { font-size: 24px; font-weight: 800; letter-spacing: -1px; }
+        .gnb { display: flex; gap: 40px; }
+        .gnb a { font-weight: 500; font-size: 15px; }
+
+        /* Hero Section */
+        #hero { height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center; background: #fff; }
+        .hero-content h1 { font-size: 64px; line-height: 1.2; margin-bottom: 24px; font-weight: 800; }
+        .hero-content p { font-size: 20px; color: var(--text-sub); margin-bottom: 40px; }
+
+        /* Trust Section */
+        #trust { background: var(--bg-light); text-align: center; }
+        .stats { display: flex; justify-content: space-around; margin-bottom: 60px; }
+        .stat-item h3 { font-size: 48px; color: var(--primary-color); }
+
+        /* Portfolio (Grid) */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px; }
+        .p-item { border-radius: 16px; overflow: hidden; background: #eee; position: relative; aspect-ratio: 16/10; }
+        .p-info { padding: 20px 0; }
+        .p-tag { font-size: 12px; color: var(--text-sub); margin-bottom: 5px; display: block; }
+
+        /* Inquiry Form */
+        #inquiry { background: #111; color: #fff; }
+        .form-container { max-width: 600px; margin: 0 auto; }
+        .input-group { margin-bottom: 20px; }
+        input, select, textarea { width: 100%; padding: 15px; background: #222; border: 1px solid #333; color: #fff; border-radius: 8px; }
+        
+        /* Footer */
+        footer { padding: 50px 20px; font-size: 13px; color: #888; border-top: 1px solid #eee; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 36px; }
+            .gnb { display: none; }
+            .stats { flex-direction: column; gap: 30px; }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>✨ K-Pop 궁합 세계 1등 도전 ✨</h1>
-        <p>사주 풀 입력 → 랭킹 등록 → 전세계 자랑</p>
-    </header>
 
-    <div class="container">
-        <!-- 사주 입력 -->
-        <input type="text" id="userName" placeholder="이름 (예: 지민 팬)" required>
-        <div class="form-row">
-            <input type="date" id="userBirth" required>
-            <input type="time" id="userTime" placeholder="시간 (모르면 12:00)">
-        </div>
-        <select id="gender" required>
-            <option value="">성별</option>
-            <option value="남">남성</option>
-            <option value="여">여성</option>
-            <option value="기타">기타</option>
-        </select>
+<header>
+    <nav>
+        <div class="logo">[회사명]</div>
+        <ul class="gnb">
+            <li><a href="#service">서비스 특징</a></li>
+            <li><a href="#portfolio">포트폴리오</a></li>
+            <li><a href="#process">프로세스</a></li>
+        </ul>
+        <a href="#inquiry" class="btn btn-primary" style="padding: 8px 20px;">문의하기</a>
+    </nav>
+</header>
 
-        <!-- 아티스트 선택 -->
-        <select id="artist" required>
-            <option value="">💖 스타를 골라주세요</option>
-            <option value="RM">BTS RM ─ 책덕후 리더</option>
-            <option value="Jennie">BLACKPINK 제니 ─ 패션 퀸</option>
-            <option value="BangChan">Stray Kids 방찬 ─ 밤샘 프로듀서</option>
-            <option value="S.Coups">SEVENTEEN 승철 ─ 13명 아빠</option>
-            <option value="Karina">aespa 카리나 ─ AI 공주</option>
-            <option value="Jungwon">ENHYPEN 정원 ─ 막내 온 탑</option>
-            <option value="Minji">NewJeans 민지 ─ Y2K 아이콘</option>
-            <option value="Yujin">IVE 유진 ─ 카리스마 보컬</option>
-            <option value="Hongjoong">ATEEZ 홍중 ─ 해적왕 캡틴</option>
-            <option value="Yeonjun">TXT 연준 ─ 4세대 춤신</option>
-        </select>
+<section id="hero">
+    <div class="hero-content" data-aos="fade-up">
+        <h1>당신의 비즈니스가 팔리는 웹사이트,<br>[회사명]이 만듭니다.</h1>
+        <p>디자인만 예쁜 사이트가 아닙니다.<br>고객의 전환을 유도하는 전략적 웹사이트를 경험하세요.</p>
+        <button class="btn btn-primary" onclick="location.href='#inquiry'">무료 상담받기</button>
+    </div>
+</section>
 
-        <!-- 랭킹 별명 -->
-        <input type="text" id="nickname" placeholder="랭킹에 남길 별명 (예: 지민의꽃길)" required>
-
-        <button onclick="calculate()">🚀 궁합 점수 뽑기</button>
-
-        <div id="result"></div>
-
-        <!-- 애드센스 -->
-        <div class="ads">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-3940256099942544"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<section id="trust">
+    <div class="container" data-aos="fade-up">
+        <div class="stats">
+            <div class="stat-item"><h3>500+</h3><p>누적 제작 건수</p></div>
+            <div class="stat-item"><h3>98%</h3><p>고객 재방문율</p></div>
+            <div class="stat-item"><h3>150%</h3><p>평균 매출 상승 지표</p></div>
         </div>
     </div>
+</section>
 
-    <footer>© 2025 Danny의 꿀벌비둘기 | 재미용 사주 서비스</footer>
+<section id="problem-solution">
+    <div class="container" style="text-align: center;" data-aos="fade-up">
+        <h2 style="font-size: 32px; margin-bottom: 20px;">"비싼 돈 주고 만든 홈페이지, 왜 문의가 없을까요?"</h2>
+        <p style="color: var(--text-sub); max-width: 700px; margin: 0 auto;">
+            단순히 예쁜 페이지는 의미가 없습니다. [회사명]은 사용자의 행동 데이터를 분석하여 <br>
+            가장 편안한 UX와 강력한 Call-to-Action을 설계합니다.
+        </p>
+    </div>
+</section>
 
-    <script>
-        const artistData = {
-            RM: {birth:'1994-09-12', element:'목', hobby:'책 읽기·철학 토론', emoji:'📚'},
-            Jennie: {birth:'1996-01-16', element:'화', hobby:'패션·럭셔리 쇼핑', emoji:'👑'},
-            BangChan: {birth:'1997-10-03', element:'금', hobby:'밤샘 작곡', emoji:'🎧'},
-            'S.Coups': {birth:'1995-08-08', element:'토', hobby:'13명 챙기기', emoji:'👨‍👩‍👧‍👦'},
-            Karina: {birth:'2000-04-11', element:'수', hobby:'AI 댄스', emoji:'🤖'},
-            Jungwon: {birth:'2004-02-09', element:'화', hobby:'리더십 훈련', emoji:'🐺'},
-            Minji: {birth:'2004-05-07', element:'목', hobby:'Y2K 패션', emoji:'📟'},
-            Yujin: {birth:'2003-08-01', element:'금', hobby:'무대 장악', emoji:'🎤'},
-            Hongjoong: {birth:'1998-11-07', element:'토', hobby:'해적 스토리텔링', emoji:'🏴‍☠️'},
-            Yeonjun: {birth:'1999-09-13', element:'수', hobby:'퍼포먼스 혁신', emoji:'💃'}
-        };
-
-        // 오행 상생/상극 점수 (0~100)
-        const elementScores = {
-            '목': {목:50, 화:80, 토:30, 금:20, 수:70},
-            '화': {목:70, 화:50, 토:80, 금:30, 수:20},
-            '토': {목:20, 화:70, 토:50, 금:80, 수:30},
-            '금': {목:30, 화:20, 토:70, 금:50, 수:80},
-            '수': {목:80, 화:30, 토:20, 금:70, 수:50}
-        };
-
-        function getUserElement(birth) {
-            const year = new Date(birth).getFullYear();
-            const elements = ['목','화','토','금','수'];
-            return elements[year % 5];
-        }
-
-        function saveRanking(name, nick, score, artist) {
-            const rankings = JSON.parse(localStorage.getItem('kpopRankings') || '[]');
-            rankings.push({name, nick, score, artist, date: new Date().toISOString()});
-            rankings.sort((a,b)=>b.score-a.score);
-            localStorage.setItem('kpopRankings', JSON.stringify(rankings.slice(0,1000)));
-            return rankings;
-        }
-
-        function getMyRank(score) {
-            const rankings = JSON.parse(localStorage.getItem('kpopRankings') || '[]');
-            return rankings.filter(r=>r.score>score).length + 1;
-        }
-
-        function calculate() {
-            const name = document.getElementById('userName').value.trim();
-            const birth = document.getElementById('userBirth').value;
-            const time = document.getElementById('userTime').value || '12:00';
-            const gender = document.getElementById('gender').value;
-            const artist = document.getElementById('artist').value;
-            const nick = document.getElementById('nickname').value.trim();
-
-            if (!name || !birth || !gender || !artist || !nick) {
-                alert('모든 항목을 입력해주세요!');
-                return;
-            }
-
-            // 점수 계산: 오행 + 입력값 기반
-            const userElement = getUserElement(birth);
-            const artistElement = artistData[artist].element;
-            let score = elementScores[userElement][artistElement];
-
-            // 이름/시간 가중치 (간단 시뮬)
-            const seed = `${name}${time}${gender}`.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
-            score = Math.floor(score * 0.7 + (seed % 30)); // 0~100
-            score = Math.min(100, Math.max(0, score));
-
-            // 랭킹 저장
-            saveRanking(name, nick, score, artist);
-            const rank = getMyRank(score);
-
-            // 결과 문구
-            const data = artistData[artist];
-            let message = '';
-            if (score >= 90) message = '천생연분! 콘서트 가서 운명 시작🔥';
-            else if (score >= 80) message = '최고 케미! 같이 무대 찢을 인연💥';
-            else if (score >= 70) message = '좋은 인연! 팬미팅 가도 잘 맞을걸?';
-            else if (score >= 60) message = '친구로 딱! 같이 게임하면 재밌어🎮';
-            else message = '조금 노력하면 좋은 친구 가능! 응원해💪';
-
-            document.getElementById('result').innerHTML = `
-                <h2>${data.emoji} ${artist}와(과) 궁합</h2>
-                <div class="rank">${score}/100점</div>
-                <p><b>${nick}</b> 님은 전 세계 <b>${rank.toLocaleString()}등</b>!</p>
-                <p>✨ ${artist} 생일: ${data.birth} | 취미: ${data.hobby}</p>
-                <p>사주 힌트: 당신의 <b>${userElement}</b> 기운과 ${artist}의 <b>${artistElement}</b> 기운 → ${message}</p>
-                <div class="share">
-                    <a href="https://x.com/intent/tweet?text=${encodeURIComponent(
-                        `${nick}의 ${artist} 궁합 ${score}/100점! 세계 ${rank}등 기록🔥\nhttps://danny89824.github.io/honeybee_pigeon.github.io/`
-                    )}" target="_blank">🐦 X에 자랑하기</a>
+<section id="portfolio">
+    <div class="container">
+        <h2 style="margin-bottom: 40px;">Selected Projects</h2>
+        <div class="portfolio-grid">
+            <div class="p-card" data-aos="fade-up">
+                <div class="p-item"></div>
+                <div class="p-info">
+                    <span class="p-tag">STAUTUP / UXUI</span>
+                    <h3>A사 커머스 플랫폼 리뉴얼</h3>
+                    <p style="font-size: 14px; color: #888;">전환율 20% 상승 · 가독성 중심 UI 개선</p>
                 </div>
-            `;
-        }
-    </script>
+            </div>
+            <div class="p-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-item"></div>
+                <div class="p-info">
+                    <span class="p-tag">CORPORATE / BRANDING</span>
+                    <h3>B 테크 기업 공식 웹사이트</h3>
+                    <p style="font-size: 14px; color: #888;">신뢰감을 주는 다크모드 디자인 · 인터랙션 강화</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="inquiry">
+    <div class="container form-container" data-aos="fade-up">
+        <h2 style="text-align: center; margin-bottom: 40px;">프로젝트 문의하기</h2>
+        <form>
+            <div class="input-group"><input type="text" placeholder="성함 / 담당자명"></div>
+            <div class="input-group"><input type="text" placeholder="연락처"></div>
+            <div class="input-group">
+                <select>
+                    <option>예산 범위 선택</option>
+                    <option>500만원 이하</option>
+                    <option>500 - 2,000만원</option>
+                    <option>2,000만원 이상</option>
+                </select>
+            </div>
+            <div class="input-group"><textarea rows="5" placeholder="문의 내용 및 참고 사이트 URL"></textarea></div>
+            <button class="btn btn-primary" style="width: 100%; background: var(--accent-color); color: #000;">상담 신청하기</button>
+        </form>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p><b>[회사명]</b> | 사업자등록번호: 000-00-00000 | 주소: 서울특별시 OO구 OO로 123</p>
+        <p style="margin-top: 10px;">© 2024 [회사명]. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+</script>
+
 </body>
 </html>
